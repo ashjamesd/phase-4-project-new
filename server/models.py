@@ -5,7 +5,7 @@ from config import db
 
 db = SQLAlchemy()
 
-class Product(db.model, SerializerMixin)
+class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'
 
     id = db.Column(db.Integer, primary_key = True)
@@ -19,3 +19,22 @@ class Product(db.model, SerializerMixin)
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
     in_stock = db.Column(db.Boolean)
+
+    product_categories = db.relationship('ProductCategory', backref='product')
+    color = db.relationship('ProductCategory', backref='color')
+
+class ProductCategory(db.Model, SerializerMixin):
+    __tablename__ = 'product_categories'
+
+    id = db.Column(db.Integer, primary_key = True)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    name = db.Column(db.String)
+
+
+
+class Color(db.Model, SerializerMixin):
+    __tablename__ = 'colors'
+
+    id = db.Column(db.Integer, primary_key = True)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    color = db.Column(db.String)
