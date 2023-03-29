@@ -31,10 +31,32 @@ class ProductCategory(db.Model, SerializerMixin):
     name = db.Column(db.String)
 
 
-
 class Color(db.Model, SerializerMixin):
     __tablename__ = 'colors'
 
     id = db.Column(db.Integer, primary_key = True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     color = db.Column(db.String)
+
+class OrderDetail(db.Model, SerializerMixin):
+    __tablename__ = 'order_details'
+
+    id = db.Column(db.Integer, primary_key=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    price = db.Column(db.Float)
+    sku = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
+
+class Order(db.Model, SerializerMixin):
+    __tablename__ = 'orders'
+
+    id = db.Column(db.Integer, primary_key=True)
+    customer_name = db.Column(db.String)
+    email = db.Column(db.String)
+    password = db.Column(db.String)
+    shipping_address = db.Column(db.String)
+    billing_address = db.Column(db.String)
+    order_email = db.Column(db.String)
+    order_date = db.Column(db.DateTime, server_default=db.func.now())
+    order_status = db.Column(db.String)
