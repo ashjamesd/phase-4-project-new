@@ -88,9 +88,9 @@ with app.app_context():
     categories = [home, clothing, kitchen]
 
     print("Creating products...")
-    vase = Product(name = "Zen Vase", price = 30, image="https://a.1stdibscdn.com/early-japanese-satsuma-antique-vase-for-sale/1121189/f_158017521565854320778/15801752_master.jpg?width=768")
-    palmShirt = Product(name = "Palm Band Tee", price = 30, image="https://f4.bcbits.com/img/0010232095_10.jpg")
-    statue = Product(name = "Buddha Statue", price = 30, image="https://i.etsystatic.com/7293498/r/il/152de0/630306168/il_fullxfull.630306168_7uq7.jpg")
+    vase = Product(name = "Zen Vase", price = '30', image="https://a.1stdibscdn.com/early-japanese-satsuma-antique-vase-for-sale/1121189/f_158017521565854320778/15801752_master.jpg?width=768")
+    palmShirt = Product(name = "Palm Band Tee", price = '30', image="https://f4.bcbits.com/img/0010232095_10.jpg")
+    statue = Product(name = "Buddha Statue", price = '30', image="https://i.etsystatic.com/7293498/r/il/152de0/630306168/il_fullxfull.630306168_7uq7.jpg")
     products = [vase, palmShirt, statue]
 
     print("Creating CategoryProduct...")

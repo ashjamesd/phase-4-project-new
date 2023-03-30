@@ -9,7 +9,7 @@ from flask_migrate import Migrate
 
 
 # Local imports
-from models import db, Camper, Activity, Signup
+from models import db, Product, Category, CategoryProduct
 
 # Views go here!
 
@@ -22,6 +22,22 @@ CORS(app)
 migrate = Migrate(app, db)
 
 db.init_app(app)
+
+@app.route('/')
+def index():
+    return '<h1>Products</h1>'
+
+@app.route('/products', methods = ['GET'])
+def products():
+    products = Product.query.all()
+    products_dict = [product.to_dict() for product in products]
+
+    response = make_response(
+        jsonify(products_dict),
+        200
+    )
+
+    return response
 
 
 if __name__ == '__main__':

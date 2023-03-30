@@ -27,7 +27,7 @@ const Home = () => {
 
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetch('http://localhost:3000/products');
+      const response = await fetch('http://127.0.0.1:5555/products');
       const data = await response.json();
       setProducts(data);
     }

@@ -81,7 +81,8 @@ class Product(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
-    ingredients = db.Column(db.String)
+    image = db.Column(db.String)
+    price = db.Column(db.Float)
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
 
@@ -94,7 +95,6 @@ class Category(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
-    address = db.Column(db.String)
 
     category_products = db.relationship('CategoryProduct', backref = 'category')
 
@@ -104,9 +104,6 @@ class CategoryProduct(db.Model, SerializerMixin):
     serialize_rules = ('-product.product_categories', '-category.category_products')
 
     id = db.Column(db.Integer, primary_key = True)
-    price = db.Column(db.Integer)
-    created_at = db.Column(db.DateTime, server_default = db.func.now())
-    updated_at = db.Column(db.DateTime, onupdate = db.func.now())
 
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
