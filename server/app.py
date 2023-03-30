@@ -27,6 +27,11 @@ db.init_app(app)
 def index():
     return '<h1>Products</h1>'
 
+@app.route('/add_product', methods = ['POST'])
+def add_product():
+    data = request.json
+    return jsonify(data)
+
 @app.route('/products', methods = ['GET'])
 def products():
     products = Product.query.all()

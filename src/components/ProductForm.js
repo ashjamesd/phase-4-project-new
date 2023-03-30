@@ -14,6 +14,56 @@ const ProductForm = ({ onAddProduct }) => {
     setPrice('');
   };
 
+
+//trying to make a post request for adding a new product
+// import React, { useState } from 'react';
+
+// const ProductForm = ({ onAddProduct }) => {
+//   const [name, setName] = useState('');
+//   const [price, setPrice] = useState('');
+//   const [imageUrl, setImageUrl] = useState('');
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await fetch('http://127.0.0.1:5555/products', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ name, price, imageUrl }),
+  //     });
+  //     const data = await response.json();
+  //     onAddProduct(data);
+  //     setName('');
+  //     setPrice('');
+  //     setImageUrl('');
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const formData = new FormData(event.target);
+  //   const data = {
+  //     name: formData.get('name'),
+  //     price: parseFloat(formData.get('price')),
+  //     imageUrl: formData.get('imageUrl')
+  //   };
+  //   fetch('http://127.0.0.1:5555/add_product', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(data)
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => console.log(data))
+  //   .catch(error => console.error(error));
+  // }
+  
+
   return (
     <form onSubmit={handleSubmit}>
       <label>
