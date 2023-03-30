@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ProductForm from './ProductForm';
 import ProductList from './ProductList';
 import Cart from './Cart';
@@ -19,11 +19,20 @@ const Home = () => {
     setCartItems((prevCartItems) => [...prevCartItems, product])};
 
 
-  const [products, setProducts] = useState([
-    { id: 1, imageUrl: 'https://picsum.photos/200/300', name: 'Product 1', price: 10 },
-    { id: 2, imageUrl: 'https://picsum.photos/200/300', name: 'Product 2', price: 20 },
-    { id: 3, imageUrl: 'https://picsum.photos/200/300', name: 'Product 3', price: 30 },
-  ]);
+  const [products, setProducts] = useState([]);
+  //   { id: 1, imageUrl: 'https://picsum.photos/200/300', name: 'Product 1', price: 10 },
+  //   { id: 2, imageUrl: 'https://picsum.photos/200/300', name: 'Product 2', price: 20 },
+  //   { id: 3, imageUrl: 'https://picsum.photos/200/300', name: 'Product 3', price: 30 },
+  // ]);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      const response = await fetch('http://localhost:3000/products');
+      const data = await response.json();
+      setProducts(data);
+    }
+    fetchProducts();
+  }, []);
 
   const [searchTerm, setSearchTerm] = useState('');
 

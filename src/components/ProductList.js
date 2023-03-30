@@ -21,17 +21,17 @@
 
 import React, { useState, useEffect } from 'react';
 
-const ProductList = ({ onAddToCart }) => {
-  const [products, setProducts] = useState([]);
+const ProductList = ({ onAddToCart, products }) => {
+//   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    async function fetchProducts() {
-      const response = await fetch('http://localhost:3000/products');
-      const data = await response.json();
-      setProducts(data);
-    }
-    fetchProducts();
-  }, []);
+//   useEffect(() => {
+//     async function fetchProducts() {
+//       const response = await fetch('http://localhost:3000/products');
+//       const data = await response.json();
+//       setProducts(data);
+//     }
+//     fetchProducts();
+//   }, []);
 
   return (
     <div>
