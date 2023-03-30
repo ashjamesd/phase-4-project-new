@@ -1,7 +1,7 @@
 # from flask_sqlalchemy import SQLAlchemy
 # from sqlalchemy_serializer import SerializerMixin
 
-# from config import db
+from config import db
 
 # db = SQLAlchemy()
 
@@ -74,10 +74,10 @@ metadata = MetaData(naming_convention={
 db = SQLAlchemy(metadata=metadata)
 
 # Add models here
-class Pizza(db.Model, SerializerMixin):
-    __tablename__ = 'pizzas'
+class Product(db.Model, SerializerMixin):
+    __tablename__ = 'products'
 
-    serialize_rules = ('-restaurants.restaurant_pizzas', '-restaurant_pizzas.pizza')
+    serialize_rules = ('-categories.category_products', '-category_products.product')
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
@@ -85,31 +85,31 @@ class Pizza(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
 
-    pizza_restaurants = db.relationship('RestaurantPizza', backref = 'pizza')
+    product_categories = db.relationship('CategoryProduct', backref = 'product')
 
-class Restaurant(db.Model, SerializerMixin):
-    __tablename__ = 'restaurants'
+class Category(db.Model, SerializerMixin):
+    __tablename__ = 'categories'
 
-    serialize_rules = ('-pizzas.pizza_restaurants', '-restaurant_pizzas.restaurant')
+    serialize_rules = ('-products.product_categories', '-category_products.category')
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
     address = db.Column(db.String)
 
-    restaurant_pizzas = db.relationship('RestaurantPizza', backref = 'restaurant')
+    category_products = db.relationship('CategoryProduct', backref = 'category')
 
-class RestaurantPizza(db.Model, SerializerMixin):
-    __tablename__ = 'restaurant_pizzas'
+class CategoryProduct(db.Model, SerializerMixin):
+    __tablename__ = 'category_products'
 
-    serialize_rules = ('-pizza.pizza_restaurants', '-restaurant.restaurant_pizzas')
+    serialize_rules = ('-product.product_categories', '-category.category_products')
 
     id = db.Column(db.Integer, primary_key = True)
     price = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
 
-    pizza_id = db.Column(db.Integer, db.ForeignKey('pizzas.id'))
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
     @validates('price')
     def validates_price(self, key, value):

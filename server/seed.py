@@ -3,7 +3,7 @@
 # from random import randint, choice as rc
 
 # from app import app
-# from models import db, Product, ProductCategory, Color, Order, OrderDetail
+# from models import db, Product, CategoryProduct, Color, Order, OrderDetail
 
 # Remote library imports
 # from faker import Faker
@@ -13,7 +13,7 @@
     # with app.app_context():
     #     print('Clearing db...')
     #     Product.query.delete()
-    #     ProductCategory.query.delete()
+    #     CategoryProduct.query.delete()
     #     Color.query.delete()
     #     Order.query.delete()
     #     OrderDetail.query.delete()
@@ -29,9 +29,9 @@
 
         # print('Seeding product_categories...')
         # product_categories = [
-        #     ProductCategory(category='Item-type'),
-        #     ProductCategory(category='Item-type'),
-        #     ProductCategory(category='Item-type'),
+        #     CategoryProduct(category='Item-type'),
+        #     CategoryProduct(category='Item-type'),
+        #     CategoryProduct(category='Item-type'),
         # ]
 
         # db.session.add_all(product_categories)
@@ -70,40 +70,38 @@ from random import choice as rc
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app import app
-from models import db, Restaurant, Pizza, RestaurantPizza
+from models import db, Category, Product, CategoryProduct
 
 with app.app_context():
 
 # This will delete any existing rows
 # so you can run the seed file multiple times without having duplicate entries in your database
     print("Deleting data...")
-    Pizza.query.delete()
-    Restaurant.query.delete()
-    RestaurantPizza.query.delete()
+    Product.query.delete()
+    Category.query.delete()
+    CategoryProduct.query.delete()
 
-    print("Creating restaurants...")
-    shack = Restaurant(name = "Karen's Pizza Shack", address = 'address1')
-    bistro = Restaurant(name = "Sanjay's Pizza", address = 'address2')
-    palace = Restaurant(name = "Kiki's Pizza", address = 'address3')
-    restaurants = [shack, bistro, palace]
+    print("Creating categories...")
+    home = Category(name = "Home")
+    clothing = Category(name = "Clothing")
+    kitchen = Category(name = "Kitchen")
+    categories = [home, clothing, kitchen]
 
-    print("Creating pizzas...")
+    print("Creating products...")
+    vase = Product(name = "Zen Vase", price = 30, image="https://a.1stdibscdn.com/early-japanese-satsuma-antique-vase-for-sale/1121189/f_158017521565854320778/15801752_master.jpg?width=768")
+    palmShirt = Product(name = "Palm Band Tee", price = 30, image="https://f4.bcbits.com/img/0010232095_10.jpg")
+    statue = Product(name = "Buddha Statue", price = 30, image="https://i.etsystatic.com/7293498/r/il/152de0/630306168/il_fullxfull.630306168_7uq7.jpg")
+    products = [vase, palmShirt, statue]
 
+    print("Creating CategoryProduct...")
 
-    cheese = Pizza(name = "Emma", ingredients = "Dough, Tomato Sauce, Cheese")
-    pepperoni = Pizza(name = "Geri", ingredients = "Dough, Tomato Sauce, Cheese, Pepperoni")
-    california = Pizza(name = "Melanie", ingredients = "Dough, Sauce, Ricotta, Red peppers, Mustard")
-    pizzas = [cheese, pepperoni, california]
-
-    print("Creating RestaurantPizza...")
-
-    pr1 = RestaurantPizza(restaurant = shack, pizza = cheese, price = 1)
-    pr2 = RestaurantPizza(restaurant = bistro, pizza  = pepperoni, price = 4)
-    pr3 = RestaurantPizza(restaurant = palace, pizza = california, price = 5)
-    restaurantPizzas = [pr1, pr2, pr3]
-    db.session.add_all(restaurants)
-    db.session.add_all(pizzas)
-    db.session.add_all(restaurantPizzas)
+    pr1 = CategoryProduct(category = home, product = vase)
+    pr2 = CategoryProduct(category = clothing, product  = palmShirt)
+    pr3 = CategoryProduct(category = kitchen, product = statue)
+    categoryProducts = [pr1, pr2, pr3]
+    db.session.add_all(categories)
+    db.session.add_all(products)
+    db.session.add_all(categoryProducts)
     db.session.commit()
 
     print("Seeding done!")

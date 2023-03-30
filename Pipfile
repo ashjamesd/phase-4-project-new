@@ -11,6 +11,7 @@ sqlalchemy-serializer = "1.4.1"
 flask-restful = "*"
 flask-cors = "*"
 faker = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
