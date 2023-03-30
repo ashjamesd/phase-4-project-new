@@ -25,10 +25,21 @@ const Home = () => {
     { id: 3, imageUrl: 'https://picsum.photos/200/300', name: 'Product 3', price: 30 },
   ]);
 
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredProducts = products.filter((product) => {
+    return product.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   return (
     <div>
       <h1>Home Component</h1>
-      <ProductList products={products} onAddToCart={addToCart} />
+      <input type="text" placeholder="Search products..." value={searchTerm} onChange={handleSearchInputChange} />
+      <ProductList products={filteredProducts} onAddToCart={addToCart} />
       <ProductForm onAddProduct={onAddProduct} />
       <Cart cartItems={cartItems} />
       
