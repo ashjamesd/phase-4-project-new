@@ -5,3 +5,7 @@
     justify-content:space-around;
     width: 50%;
   }
+
+  .productImage{
+    width: 25%;
+  }
