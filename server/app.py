@@ -27,10 +27,56 @@ db.init_app(app)
 def index():
     return '<h1>Products</h1>'
 
-@app.route('/add_product', methods = ['POST'])
-def add_product():
+
+# TRYING TO GET THE NEW PRODUCT POST WORKING
+# @app.route('/add_product', methods = ['POST'])
+# def add_product():
+#     data = request.json
+#     return jsonify(data)
+
+# route for users from registration
+users = []
+
+@app.route('/users', methods=['POST'])
+def register_user():
     data = request.json
-    return jsonify(data)
+    username = data['username']
+    password = data['password']
+
+    # adding new user
+    user = {'username': username, 'password': password}
+    users.append(user)
+
+    return response
+
+@app.route('/category_products', methods = ['POST'])
+def categoryProducts():
+    try:
+
+        new_category_product = CategoryProduct(
+            product_id = request.get_json()['product_id'],
+            category_id = request.get_json()['category_id']
+        )
+
+        db.session.add(new_category_product)
+        db.session.commit()
+
+        associated_product = Product.query.filter(Product.id == new_category_product.product_id).first()
+        associated_product_dict = associated_product.to_dict()
+
+        response = make_response(
+            jsonify(associated_product_dict),
+            201
+        )
+
+    except ValueError:
+
+        response = make_response(
+            { "errors": ["validation errors"] },
+            400
+        )
+
+    return response
 
 @app.route('/products', methods = ['GET'])
 def products():

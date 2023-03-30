@@ -1,20 +1,3 @@
-import React, { useState } from 'react';
-
-const ProductForm = ({ onAddProduct }) => {
-  const [imageUrl, setImageUrl] = useState('');
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newProduct = { imageUrl, name, price };
-    onAddProduct(newProduct);
-    setImageUrl('');
-    setName('');
-    setPrice('');
-  };
-
-
 //trying to make a post request for adding a new product
 // import React, { useState } from 'react';
 
@@ -63,6 +46,25 @@ const ProductForm = ({ onAddProduct }) => {
   //   .catch(error => console.error(error));
   // }
   
+
+
+import React, { useState } from 'react';
+
+const ProductForm = ({ onAddProduct }) => {
+  const [imageUrl, setImageUrl] = useState('');
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newProduct = { imageUrl, name, price };
+    onAddProduct(newProduct);
+    setImageUrl('');
+    setName('');
+    setPrice('');
+  };
+
+
 
   return (
     <form onSubmit={handleSubmit}>
