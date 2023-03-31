@@ -34,6 +34,22 @@ def index():
 #     data = request.json
 #     return jsonify(data)
 
+@app.route('/add_product', methods=['POST'])
+def add_product():
+    name = request.json.get('name')
+    price = request.json.get('price')
+    image = request.json.get('image')
+
+    if not all([name, price, image]):
+        response = make_response(jsonify({'error': 'Missing required parameters'}), 400)
+    else:
+        product = Product(name=name, price=price, image=image)
+        db.session.add(product)
+        db.session.commit()
+        response = make_response(jsonify({'message': 'Product added successfully'}), 201)
+
+    return response
+
 # route for users from registration
 users = []
 
