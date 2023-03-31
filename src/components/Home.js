@@ -46,7 +46,7 @@ const Home = () => {
 
   return (
     <div className='homeComponent'>
-      <h1 className='welcomeTitle'>Welcome To Another's Treasures</h1>
+      <h1 className='welcomeTitle'>Another's Treasures</h1>
         <div className='parent'>
           <div className='child'>
             <input className='searchBar' type="text" placeholder="Search items..." value={searchTerm} onChange={handleSearchInputChange} />

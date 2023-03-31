@@ -7,8 +7,8 @@ const Cart = ({ cartItems }) => {
       {cartItems && cartItems.map(item => (
         <div key={item.id}>
           <h3>{item.name}</h3>
-          <p>{item.price}</p>
-          <button className='removeItem'>Remove from cart</button>
+          <p>${item.price}</p>
+          {/* <button className='removeItem'>Remove from cart</button> */}
         </div>
       ))}
     </div>
