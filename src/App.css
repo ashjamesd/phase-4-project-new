@@ -2,10 +2,133 @@
     display: flex;
     flex-direction: row;
     list-style-type: none;
-    justify-content:space-around;
+    justify-content:left;
+    text-shadow: 1px 1px;
+    word-spacing: 10%;
     width: 50%;
+    /* background-color: rgba(44, 230, 255, 0.87); */
+    font-size: 16pt;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-left: 34%;
   }
 
   .productImage{
     width: 25%;
+  }
+
+  .aboutHeader{
+    font-family: monospace;
+  }
+
+  .aboutText{
+    background-color: rgb(245, 203, 92);
+    font-size: 20pt;
+    width: 20%;
+    font-family: monospace;
+    border-style: solid;
+    padding: 20px;
+    border-width: 1px;
+    border-radius: 2px;
+    text-shadow: 2px 2px;
+    font-weight: 20;
+    margin-left: 28%;
+    margin-top: 5%;
+
+  }
+
+  .homeComponent{
+    font-family:monospace;
+    background-color: rgb(245, 203, 92);
+    font-stretch: ultra-expanded;
+    
+  }
+
+  .productName{
+    background-color:#E8EDDF;
+    border-style: solid;
+    border-width: 1px;
+    width: fit-content;
+    text-shadow: 1px 1px;
+    padding: 5px;
+    font-size: 16pt;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+    font-weight: 100;
+  }
+
+  .productImage{
+    /* border-style:dashed;
+    border-width: 2px; */
+    border-color: rgb(245, 203, 92);
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.19);
+    width: 60%;
+  }
+
+  .productsMapped{
+    padding: 20px;
+    padding-top: 50px;
+    width: auto;
+    white-space: nowrap;
+  }
+
+  .itemsForSale{
+    /* text-shadow: 3px 3px; */
+    padding-left: 1%;
+    font-size: 26pt;
+    padding-top: 20px;
+    color: #242423
+  }
+
+  .searchBar{
+    position: relative;
+    left: 1%;
+    width: 300px;
+    height: auto;
+    font-size: 16pt;
+
+  }
+
+  .parent{
+
+  }
+
+  .child{
+    display: inline-block;
+
+  
+    vertical-align:top;
+    width: 45%;
+  }
+
+  .cart{
+    padding-top: 10%;
+  }
+  .welcomeTitle{
+    background-color: #242423;
+    color:#E8EDDF;
+    text-shadow: 7px -2px #bdbdbde8;
+    text-decoration:double;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    font-weight: 150;
+    font-variant: small-caps;
+
+  
+    font-size: 40pt;
+    font-stretch:ultra-expanded;
+    padding: 40px;
+    padding-left: 30%;
+  }
+
+  .newProductForm{
+    padding-top: 5px;
+  }
+  
+  .addItemTitle{
+    padding-top: 50px;
+
+  }
+
+  .productName{
+    width: fit-content;
   }

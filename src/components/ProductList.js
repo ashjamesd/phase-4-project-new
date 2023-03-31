@@ -35,12 +35,12 @@ const ProductList = ({ onAddToCart, products }) => {
 
   return (
     <div>
-      <h2>Featured Products</h2>
+      <h2 className='itemsForSale'>Items for sale</h2>
       {products.map((product) => (
-        <div key={product.id}>
+        <div key={product.id} className = 'productsMapped' >
           <img className='productImage' src={product.image} alt={product.name} />
-          <h3>{product.name}</h3>
-          <p>{product.price}</p>
+          <h3 className='productName'>{product.name}</h3>
+          <p>${product.price}</p>
           <button onClick={() => onAddToCart(product)}>Add to cart</button>
         </div>
       ))}

@@ -45,12 +45,18 @@ const Home = () => {
   });
 
   return (
-    <div>
-      <h1>Home Component</h1>
-      <input type="text" placeholder="Search products..." value={searchTerm} onChange={handleSearchInputChange} />
-      <ProductList products={filteredProducts} onAddToCart={addToCart} />
-      <ProductForm onAddProduct={onAddProduct} />
-      <Cart cartItems={cartItems} />
+    <div className='homeComponent'>
+      <h1 className='welcomeTitle'>Another's Treasures</h1>
+        <div className='parent'>
+          <div className='child'>
+            <input className='searchBar' type="text" placeholder="Search items..." value={searchTerm} onChange={handleSearchInputChange} />
+            <ProductList products={filteredProducts} onAddToCart={addToCart} />
+          </div>
+          <div className='child'>
+            <ProductForm onAddProduct={onAddProduct} />
+            <Cart cartItems={cartItems} />
+          </div>
+        </div>
       
     </div>
   );

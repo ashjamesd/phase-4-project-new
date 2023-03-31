@@ -25,7 +25,11 @@ db.init_app(app)
 
 @app.route('/')
 def index():
-    return '<h1>Products</h1>'
+    return '<h1>Backend</h1>'
+
+@app.route('/users', methods=['POST'])
+def users():    
+    return '<h1>Registered Users</h1>'
 
 
 # TRYING TO GET THE NEW PRODUCT POST WORKING
@@ -35,19 +39,40 @@ def index():
 #     return jsonify(data)
 
 # route for users from registration
-users = []
+# users = []
 
-@app.route('/users', methods=['POST'])
-def register_user():
-    data = request.json
-    username = data['username']
-    password = data['password']
+# @app.route('/users', methods=['POST'])
+# def register_user():
+#     data = request.json
+#     username = data['username']
+#     password = data['password']
 
-    # adding new user
-    user = {'username': username, 'password': password}
-    users.append(user)
+#     # adding new user
 
-    return response
+# @app.route('/users', methods=['POST'])
+# def create_user():
+
+#     username = request.json['username']
+#     password = request.json['password']
+
+
+#     if User.query.filter_by(username=username).first():
+#         return jsonify({'error': 'User already exists'}), 400
+    
+
+#     user = User(username=username, password=generate_password_hash(password))
+#     db.session.add(user)
+#     db.session.commit()
+
+
+#     response = {
+#         'id': user.id,
+#         'username': user.username
+#     }
+#     return jsonify(response), 201
+
+
+    
 
 @app.route('/category_products', methods = ['POST'])
 def categoryProducts():

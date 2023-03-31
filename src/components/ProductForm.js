@@ -67,21 +67,24 @@ const ProductForm = ({ onAddProduct }) => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Image URL:
-        <input type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
-      </label>
-      <label>
-        Name:
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-      </label>
-      <label>
-        Price:
-        <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
-      </label>
-      <button type="submit">Add Product</button>
-    </form>
+    <div>
+      <h2 className='addItemTitle'>Add an Item</h2>
+      <form className='newProductForm' onSubmit={handleSubmit}>
+        <label>
+          Image URL:
+          <input type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+        </label>
+        <label>
+          Name:
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        </label>
+        <label>
+          Price:
+          <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
+        </label>
+        <button type="submit">Add Product</button>
+      </form>
+    </div>
   );
 };
 

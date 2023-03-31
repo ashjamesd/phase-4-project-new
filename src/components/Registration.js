@@ -10,7 +10,8 @@ const Registration = () => {
     try {
       const response = await fetch('http://127.0.0.1:5555/users', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS' },
         body: JSON.stringify({ email, username, password }),
       });
       const data = await response.json();
