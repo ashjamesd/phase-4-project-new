@@ -2,10 +2,87 @@
     display: flex;
     flex-direction: row;
     list-style-type: none;
-    justify-content:space-around;
+    justify-content:left;
+    text-shadow: 1px 1px;
+    word-spacing: 10%;
     width: 50%;
+    /* background-color: rgba(44, 230, 255, 0.87); */
+    font-size: 16pt;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
   }
 
   .productImage{
     width: 25%;
+  }
+
+  .homeComponent{
+    font-family:monospace;
+    background-color: rgb(245, 203, 92);
+    font-stretch: ultra-expanded;
+    
+  }
+
+  .productName{
+    background-color:#E8EDDF;
+    border-style: solid;
+    border-width: 1px;
+    width: fit-content;
+    text-shadow: 1px 1px;
+    padding: 5px;
+    font-size: 16pt;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+    font-weight: 100;
+  }
+
+  .productImage{
+    /* border-style:dashed;
+    border-width: 2px; */
+    border-color: rgb(245, 203, 92);
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.19)
+  }
+
+  .productsMapped{
+    padding: 20px;
+    padding-top: 50px;
+  }
+
+  .itemsForSale{
+    text-shadow: 3px 3px;
+    font-weight:200;
+    padding-left: 1%;
+    font-size: 26pt;
+    padding-top: 20px;
+  }
+
+  .searchBar{
+    position: relative;
+    left: 1%;
+    width: 300px;
+    height: auto;
+    font-size: 16pt;
+
+  }
+
+  .welcomeTitle{
+    background-color: #242423;
+    color:#E8EDDF;
+    text-shadow: 7px -3px #e8eddfe8;
+    text-decoration:double;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    font-weight: 150;
+
+  
+    font-size: 32pt;
+    font-stretch:ultra-expanded;
+    padding: 40px;
+  }
+
+  .newProductForm{
+    padding-top: 5px;
+  }
+  
+  .addItemTitle{
+    padding-top: 50px;
   }
