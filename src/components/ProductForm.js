@@ -50,18 +50,63 @@
 
 import React, { useState } from 'react';
 
+// const handleSubmit = (event) =>{
+//   event.preventDefault();
+//   if(data.password === data.confirmPassword){
+
+//     const body ={
+//       username: data.username,
+//       email: data.email,
+//       password: data.password
+//     }
+//     console.log(body)
+    
+//     fetch('http://localhost:5555/users',{
+//       method: 'POST',
+//       body: JSON.stringify(body),
+//       headers:{
+//         'content-type': 'application/json'
+//       }
+//     })
+
+//     reset()
+//     }
+
+//   else{
+//     alert("Passwords do not match")
+//   }
+
+// }
+
 const ProductForm = ({ onAddProduct }) => {
-  const [imageUrl, setImageUrl] = useState('');
+  const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newProduct = { imageUrl, name, price };
-    onAddProduct(newProduct);
-    setImageUrl('');
-    setName('');
-    setPrice('');
+    const newProduct = {
+      image:image,
+      name:name,
+      price:price,
+    };
+
+    console.log(newProduct)
+
+    fetch("http://localhost:5555/category_products",{
+      method: "POST",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify(newProduct),
+    })
+
+
+    //LOCALLY ADDING NEW PRODUCT
+    // onAddProduct(newProduct);
+    // setImage('');
+    // setName('');
+    // setPrice('');
 
     console.log(newProduct)
   };
@@ -74,7 +119,7 @@ const ProductForm = ({ onAddProduct }) => {
       <form className='newProductForm' onSubmit={handleSubmit}>
         <label>
           Image URL:
-          <input type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+          <input type="text" value={image} onChange={(e) => setImage(e.target.value)} />
         </label>
         <label>
           Name:
