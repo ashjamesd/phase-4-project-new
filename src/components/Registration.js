@@ -24,11 +24,13 @@ const Registration = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     if (username === "" || email === "" || password === "") {
       setError(true);
     } else {
       setSubmitted(true);
       setError(false);
+
     }
   };
 

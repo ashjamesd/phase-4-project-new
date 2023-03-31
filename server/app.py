@@ -25,7 +25,11 @@ db.init_app(app)
 
 @app.route('/')
 def index():
-    return '<h1>Products</h1>'
+    return '<h1>Backend</h1>'
+
+@app.route('/users', methods=['POST'])
+def users():    
+    return '<h1>Registered Users</h1>'
 
 
 # TRYING TO GET THE NEW PRODUCT POST WORKING
@@ -34,47 +38,86 @@ def index():
 #     data = request.json
 #     return jsonify(data)
 
-# route for users from registration
-users = []
+@app.route('/add_product', methods=['POST'])
+def add_product():
+    name = request.json.get('name')
+    price = request.json.get('price')
+    image = request.json.get('image')
 
-@app.route('/users', methods=['POST'])
-def register_user():
-    data = request.json
-    username = data['username']
-    password = data['password']
-
-    # adding new user
-    user = {'username': username, 'password': password}
-    users.append(user)
+    if not all([name, price, image]):
+        response = make_response(jsonify({'error': 'Missing required parameters'}), 400)
+    else:
+        product = Product(name=name, price=price, image=image)
+        db.session.add(product)
+        db.session.commit()
+        response = make_response(jsonify({'message': 'Product added successfully'}), 201)
 
     return response
 
-@app.route('/category_products', methods = ['POST'])
-def categoryProducts():
-    try:
+# route for users from registration
+# users = []
 
-        new_category_product = CategoryProduct(
-            product_id = request.get_json()['product_id'],
-            category_id = request.get_json()['category_id']
-        )
+# @app.route('/users', methods=['POST'])
+# def register_user():
+#     data = request.json
+#     username = data['username']
+#     password = data['password']
 
-        db.session.add(new_category_product)
+#     # adding new user
+
+# @app.route('/users', methods=['POST'])
+# def create_user():
+
+#     username = request.json['username']
+#     password = request.json['password']
+
+
+#     if User.query.filter_by(username=username).first():
+#         return jsonify({'error': 'User already exists'}), 400
+    
+
+#     user = User(username=username, password=generate_password_hash(password))
+#     db.session.add(user)
+#     db.session.commit()
+
+
+#     response = {
+#         'id': user.id,
+#         'username': user.username
+#     }
+#     return jsonify(response), 201
+
+
+    
+
+@app.route('/category_products', methods=['GET', 'POST', 'DELETE'])
+def category_products():
+    if request.method == 'GET':
+        # Handle GET request to retrieve all category products
+        category_products = CategoryProduct.query.all()
+        category_products_dict = [category_product.to_dict() for category_product in category_products]
+        response = make_response(jsonify(category_products_dict), 200)
+
+    elif request.method == 'POST':
+        # Handle POST request to add a new category product
+        product_id = request.json.get('product_id')
+        category_id = request.json.get('category_id')
+        category_product = CategoryProduct(product_id=product_id, category_id=category_id)
+        db.session.add(category_product)
         db.session.commit()
+        response = make_response(jsonify({'message': 'Category product added'}), 201)
 
-        associated_product = Product.query.filter(Product.id == new_category_product.product_id).first()
-        associated_product_dict = associated_product.to_dict()
+    elif request.method == 'DELETE':
+        # Handle DELETE request to remove a category product
+        category_product_id = request.args.get('id')
+        category_product = CategoryProduct.query.filter_by(id=category_product_id).first()
 
-        response = make_response(
-            jsonify(associated_product_dict),
-            201
-        )
-
-    except ValueError:
-
-        response = make_response(
-            { "errors": ["validation errors"] },
-            400
-        )
+        if category_product:
+            db.session.delete(category_product)
+            db.session.commit()
+            response = make_response(jsonify({'message': 'Category product deleted'}), 200)
+        else:
+            response = make_response(jsonify({'error': 'Category product not found'}), 404)
 
     return response
 
