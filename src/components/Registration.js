@@ -1,42 +1,106 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Registration = () => {
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = async (event) => {
+  const handleName = (event) => {
+    setUsername(event.target.value);
+    setSubmitted(false);
+  };
+
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+    setSubmitted(false);
+  };
+
+  const handlePassword = (event) => {
+    setPassword(event.target.value);
+    setSubmitted(false);
+  };
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    try {
-      const response = await fetch('http://127.0.0.1:5555/users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'*',
-        'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS' },
-        body: JSON.stringify({ email, username, password }),
-      });
-      const data = await response.json();
-      console.log('Registration successful:', data);
-    } catch (error) {
-      console.error('Error registering user:', error);
+
+    if (username === "" || email === "" || password === "") {
+      setError(true);
+    } else {
+      setSubmitted(true);
+      setError(false);
+
     }
   };
 
+  const successMessage = () => {
+    return (
+      <div
+        className="success"
+        style={{
+          display: submitted ? "" : "none",
+        }}
+      >
+        <h1>User {username} successfully registered!!</h1>
+      </div>
+    );
+  };
+
+  const errorMessage = () => {
+    return (
+      <div
+        className="error"
+        style={{
+          display: error ? "" : "none",
+        }}
+      >
+        <h1>Please enter all the fields</h1>
+      </div>
+    );
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email:
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      </label>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-      </label>
-      <button type="submit">Register</button>
-    </form>
+    <div className="form">
+      <div>
+        <h1>User Registration</h1>
+      </div>
+
+      <div className="messages">
+        {errorMessage()}
+        {successMessage()}
+      </div>
+
+      <form>
+        <label className="label">Username</label>
+        <input
+          onChange={handleName}
+          className="input"
+          value={username}
+          type="text"
+        />
+        |
+        <label className="label">Email</label>
+        <input
+          onChange={handleEmail}
+          className="input"
+          value={email}
+          type="email"
+        />
+        |
+        <label className="label">Password</label>
+        <input
+          onChange={handlePassword}
+          className="input"
+          value={password}
+          type="password"
+        />
+        |
+        <button onClick={handleSubmit} className="btn" type="submit">
+          Submit
+        </button>
+      </form>
+    </div>
   );
 };
 
