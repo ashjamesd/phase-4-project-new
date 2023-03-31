@@ -29,8 +29,18 @@ def index():
 
 @app.route('/users', methods=['POST'])
 def users():
-    console.log(data)
+    username = request.get_json()('username'),
+    email = request.get_json()('email'),
+    password = request.get_json()('password')
+
+    #  = Product(name=name, price=price, image=image)
+    #     db.session.add(product)
+    #     db.session.commit()
+    #     response = make_response(jsonify({'message': 'Product added successfully'}), 201)
+
+
     data=request.json
+    print(data)
     return jsonify(data)
 
 
@@ -40,19 +50,19 @@ def users():
 #     data = request.json
 #     return jsonify(data)
 
-@app.route('/add_product', methods=['POST'])
+@app.route('/category_products', methods=['POST'])
 def add_product():
-    name = request.json.get('name')
-    price = request.json.get('price')
-    image = request.json.get('image')
 
-    if not all([name, price, image]):
-        response = make_response(jsonify({'error': 'Missing required parameters'}), 400)
-    else:
-        product = Product(name=name, price=price, image=image)
-        db.session.add(product)
-        db.session.commit()
-        response = make_response(jsonify({'message': 'Product added successfully'}), 201)
+    new_product = Product(
+        name = request.get_json()['name'],    
+        price = request.get_json()['price'],
+        image = request.get_json()['image']
+    )
+        # product = Product(name=name, price=price, image=image)
+    db.session.add(new_product)
+    db.session.commit()
+    
+    response = make_response(jsonify(new_product), 201)
 
     return response
 
