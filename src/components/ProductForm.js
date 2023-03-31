@@ -62,6 +62,8 @@ const ProductForm = ({ onAddProduct }) => {
     setImageUrl('');
     setName('');
     setPrice('');
+
+    console.log(newProduct)
   };
 
 

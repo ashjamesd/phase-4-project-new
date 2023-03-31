@@ -33,6 +33,7 @@
     font-weight: 20;
     margin-left: 28%;
     margin-top: 5%;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.19);
 
   }
 
@@ -105,7 +106,7 @@
   .welcomeTitle{
     background-color: #242423;
     color:#E8EDDF;
-    text-shadow: 7px -2px #bdbdbde8;
+    text-shadow: 7px -2px #bdbdbd65;
     text-decoration:double;
     border-style: solid;
     border-width: 1px;
