@@ -28,19 +28,16 @@ const submitForm = (data) =>{
       username: data.username,
       email: data.email,
       password: data.password
-    }    
-
-    const requestOptions={
-      methods: "POST",
-      headers:{
-        'content-type':'application/json'
-      },
-      body:JSON.stringify(body)
     }
-
-    fetch('http://localhost:5555/users', requestOptions)
-    .then(response=>response.json())
-    .then(data=>console.log(data))
+    console.log(body)
+    
+    fetch('http://localhost:5555/users',{
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers:{
+        'content-type': 'application/json'
+      }
+    })
 
     reset()
     }

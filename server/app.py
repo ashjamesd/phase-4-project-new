@@ -28,8 +28,10 @@ def index():
     return '<h1>Backend</h1>'
 
 @app.route('/users', methods=['POST'])
-def users():    
-    return '<h1>Registered Users</h1>'
+def users():
+    console.log(data)
+    data=request.json
+    return jsonify(data)
 
 
 # TRYING TO GET THE NEW PRODUCT POST WORKING
