@@ -46,11 +46,17 @@ const Home = () => {
 
   return (
     <div className='homeComponent'>
-      <h1 className='welcomeTitle'>Welcome to Another's Treasures</h1>
-      <input className='searchBar' type="text" placeholder="Search items..." value={searchTerm} onChange={handleSearchInputChange} />
-      <ProductList products={filteredProducts} onAddToCart={addToCart} />
-      <ProductForm onAddProduct={onAddProduct} />
-      <Cart cartItems={cartItems} />
+      <h1 className='welcomeTitle'>Welcome To Another's Treasures</h1>
+        <div className='parent'>
+          <div className='child'>
+            <input className='searchBar' type="text" placeholder="Search items..." value={searchTerm} onChange={handleSearchInputChange} />
+            <ProductList products={filteredProducts} onAddToCart={addToCart} />
+          </div>
+          <div className='child'>
+            <ProductForm onAddProduct={onAddProduct} />
+            <Cart cartItems={cartItems} />
+          </div>
+        </div>
       
     </div>
   );
