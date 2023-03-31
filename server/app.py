@@ -37,17 +37,38 @@ def index():
 # route for users from registration
 users = []
 
+# @app.route('/users', methods=['POST'])
+# def register_user():
+#     data = request.json
+#     username = data['username']
+#     password = data['password']
+
+#     # adding new user
+
 @app.route('/users', methods=['POST'])
-def register_user():
-    data = request.json
-    username = data['username']
-    password = data['password']
+def create_user():
+    # get the user information from the request
+    username = request.json['username']
+    password = request.json['password']
 
-    # adding new user
-    user = {'username': username, 'password': password}
-    users.append(user)
+    # check if the user already exists in the database
+    if User.query.filter_by(username=username).first():
+        return jsonify({'error': 'User already exists'}), 400
+    
+    # create a new user object and save it to the database
+    user = User(username=username, password=generate_password_hash(password))
+    db.session.add(user)
+    db.session.commit()
 
-    return response
+    # create a response with the user information and return it
+    response = {
+        'id': user.id,
+        'username': user.username
+    }
+    return jsonify(response), 201
+
+
+    
 
 @app.route('/category_products', methods = ['POST'])
 def categoryProducts():
